@@ -1,3 +1,5 @@
+
+
 export default {
     //设置cookie
     setCookie(name, value, days){
