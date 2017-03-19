@@ -1,4 +1,4 @@
-.p-dazhuanpan-index {
+﻿.p-dazhuanpan-index {
     position: relative;
     width: 100%;
     height: 100%;
@@ -71,8 +71,8 @@
             .inner{
                 position: absolute;
                 z-index: 9;
-                width: 68.18%;
-                height: 68.18%;
+                // width: 68.18%;
+                // height: 68.18%;
                 margin: 15.91%;
                 top: 0;
                 left: 0;
@@ -85,9 +85,33 @@
             top: 0;
             left: 0;
             z-index: 10;
-            background: url(./images/zp_btn_1.png) no-repeat center;
+            background: url(./images/zp_btn.png) no-repeat center;
             background-size: 100%;
-            animation-name: breath; 
+
+            .inner{
+                width: 100% * 178 / 643;
+                margin-left: 100% * 2/ 643;
+                position: absolute;
+                display: block;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 10;
+                animation-name: breath; 
+                animation-duration: 2s;                         /* 动画时长3秒 */
+                animation-timing-function: ease-in-out;         /* 动画速度曲线：以低速开始和结束 */
+                animation-iteration-count: infinite;            /* 播放次数：无限 */
+            }
+            @keyframes breath {
+                from {width: 100% * 158 / 643;}
+                50%  {width: 100% * 178 / 643;}
+                to   {width: 100% * 158 / 643;}
+            }
+            @-webkit-keyframes breath {
+                from {width: 100% * 158 / 643;}
+                50%  {width: 100% * 178 / 643;}
+                to   {width: 100% * 158 / 643;}
+            }
         }
         .rule{
             display: block;
@@ -97,16 +121,6 @@
             height: 100% * 129 / 643;
             bottom: 100% * 27 / 643;
             left: 100% * 27 / 643;
-        }
-        @keyframes breath {
-            from {width: 100%;}
-            50%  {width: 50%;}
-            to   {width: 100%;}
-        }
-        @-webkit-keyframes breath {
-            from {width: 100%;}
-            50%  {width: 50%;}
-            to   {width: 100%;}
         }
     }
     
@@ -144,6 +158,7 @@
         }
     }
     .win_rule{
+        top: 55%;
         .content{
             position: absolute;
             width: 100% * 283 / 348;

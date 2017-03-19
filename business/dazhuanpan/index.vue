@@ -14,11 +14,13 @@
                 <!-- 大转盘gif灯光 -->
                 <div class="gif"></div>
                 <!-- 大转盘奖项 -->
-                <canvas class="inner"></canvas>
+                <!-- <canvas class="inner" ></canvas> -->
             </div>
             <!-- 大转盘按钮 -->
-            <div id="lotteryBtn" class="btn" @click="lotteryClick"></div>
-            <!-- 活动规则 -->
+            <div id="lotteryBtn" class="btn" @click="lotteryClick">
+                <img :src="images.zp_btn_3" class="inner" alt="">
+            </div>
+            <!-- 活动规则按钮 -->
             <img :src="images.rule" alt="" class="rule" @click="ruleWinShow">
         </div>
         <!-- 活动规则 -->
@@ -48,7 +50,7 @@
                 <div v-show="statusWin == 'status-login'">
                     <input v-model="loginParams.telephone" type="number" class="input-phone">
                     <input v-model="loginParams.code" type="number" class="input-code">
-                    <div class="error" v-show="statusError">
+                    <div id="error" class="error" v-show="statusError">
                         <img :src="images.error" alt="">
                         <div class="msg" v-show="statusError=='error-return'">{{errorMsg}}</div>
                         <div class="msg" v-show="statusError=='error-tel-num'">手机号位数不正确</div>
@@ -101,6 +103,7 @@
                 myorder: [], // 中奖列表信息
                 images: {
                     zp_2: require("./images/zp2.png"),
+                    zp_btn_3: require("./images/zp_btn_3.png"),
                     gif: require("./images/gif.gif"),
                     rule: require("./images/rule.png"),
                     win_rule: require("./images/win_rule.png"),
@@ -140,7 +143,14 @@
                     [styleObj[0], styleObj[1], styleObj[0], styleObj[1], styleObj[0], styleObj[1], styleObj[0], styleObj[1], styleObj[0], styleObj[1]],
                 ],
                 // 大转盘奖品
-                prizes: undefined,
+                prizes: [
+                    {id: 1, winning_name: "一等奖"},
+                    {id: 2, winning_name: "二等奖"},
+                    {id: 3, winning_name: "三等奖"},
+                    {id: 4, winning_name: "四等奖"},
+                    {id: 5, winning_name: "5等奖"},
+                    {id: 6, winning_name: "6等奖"},
+                ],
                 // 大转盘配置
                 config: {
                     startAngle: 0,
@@ -158,12 +168,27 @@
         methods:{
             init(){
                 this.loading = true;
-                // this.statusWin = "status-login";
-                // debugger;
                 this.initSize();
                 this.initDate();
-                this.getPrizeList();
-                
+                this.accesstoken();
+                // 验证通过 ready 函数
+                ffanSDK.ready((sdk) => {
+                    // config 信息验证通过后会执行 ready 方法
+                    ffanSKD.setTitle({"title": "幸运大转盘"});
+                    this.getPrizeList();
+                });
+
+                // 校验失败的 error 函数
+                ffanSDK.error(() => {
+
+                });
+                // this.statusWin = "status-login";
+                // debugger;
+                // TODO 隐藏
+                // this.getPrizeList();
+                this.drawBase();
+                        this.drawItem();
+
                 // this.ruleWinShow();
                 // this.tipWinShow("status-in");
                 // this.initSize();
@@ -171,7 +196,7 @@
                 // this.tipWinShow("status-login");
             },
             initSize(){
-                setTimeout(function(){
+                // setTimeout(function(){
                     $("body").css("font-size", 20 * $("body").width() / 750 + "px")
                     $(".code-msg .inner").css("line-height", $(".code-msg .inner").height() + "px");
                     $(".status-login .error").css("line-height", $(".status-login .error").height() + "px");
@@ -182,12 +207,14 @@
                     $(".win_rule .content").css({
                         "font-size": 28 * $("body").width() / 750 + "px"
                     });
-                }, 0)
+                    let sideSize = $(".gif").width() * 0.6818;
+                    $("#lottery").append('<canvas class="inner" width="'+sideSize+'" height="'+sideSize+'" ></canvas>')
+                    
+                // }, 0)
             },
             initDate(){
                 this.canvas = $("canvas");
                 // this.config.startAngle = Math.PI*(1.5-1/this.prize.length);
-                this.config.startAngle = 0;
                 this.config.width = this.canvas.width();
                 this.config.height = this.canvas.width();
                 //大转盘内圆的半径
@@ -207,6 +234,7 @@
                 this.ctx = this.canvas[0].getContext("2d");
                 //根据奖品个数计算圆周角度
                 this.arc = Math.PI / (this.prizes.length / 2);
+                this.config.startAngle = -Math.PI*0.5 - this.arc / 2;
                 //在给定矩形内清空一个矩形
                 this.ctx.clearRect(0, 0, this.config.width, this.config.height);
                 //strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式  
@@ -223,26 +251,26 @@
                     this.ctx.fillStyle = this.styleArr[this.prizes.length][i];
                     this.ctx.beginPath();
                     //arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）    
-                    this.ctx.arc(this.config.width/4, this.config.height/8, this.config.outsideRadius, angle, angle + this.arc, false);
-                    this.ctx.arc(this.config.width/4, this.config.height/8, this.config.insideRadius, angle + this.arc, angle, true);
+                    this.ctx.arc(this.config.width/2, this.config.height/2, this.config.outsideRadius, angle, angle + this.arc, false);
+                    this.ctx.arc(this.config.width/2, this.config.height/2, this.config.insideRadius, angle + this.arc, angle, true);
                     this.ctx.stroke();
                     this.ctx.fill();
                     //锁画布(为了保存之前的画布状态)
                     this.ctx.save();
 
-                    // //----绘制奖品开始----
-                    // this.ctx.fillStyle = "#000";
-                    // var text = this.prizes[i].winning_name;
-                    // //translate方法重新映射画布上的 (0,0) 位置
-                    // this.ctx.translate(this.config.width/2 + Math.cos(angle + this.arc / 2) * this.config.textRadius, this.config.height/2 + Math.sin(angle + this.arc / 2) * this.config.textRadius);
+                    //----绘制奖品开始----
+                    this.ctx.fillStyle = "#000";
+                    var text = this.prizes[i].winning_name;
+                    //translate方法重新映射画布上的 (0,0) 位置
+                    this.ctx.translate(this.config.width/2 + Math.cos(angle + this.arc / 2) * this.config.textRadius, this.config.height/2 + Math.sin(angle + this.arc / 2) * this.config.textRadius);
 
-                    // //rotate方法旋转当前的绘图
-                    // this.ctx.rotate(angle + this.arc / 2 + Math.PI / 2);
-                    // this.ctx.fillText(text, -this.ctx.measureText(text).width / 2, this.prizes[i].img_url?-50:0);
+                    //rotate方法旋转当前的绘图
+                    this.ctx.rotate(angle + this.arc / 2 + Math.PI / 2);
+                    this.ctx.fillText(text, -this.ctx.measureText(text).width / 2, this.prizes[i].img_url?-50:0);
 
-                    // //把当前画布返回（调整）到上一个save()状态之前 
-                    // this.ctx.restore();
-                    // //----绘制奖品结束----
+                    //把当前画布返回（调整）到上一个save()状态之前 
+                    this.ctx.restore();
+                    //----绘制奖品结束----
                     console.log("drawItem绘制" + i + " end");
                 }
 
@@ -481,6 +509,25 @@
                 }).then(function(data){
                     if(data && data.body && data.body.meta && data.body.meta.errno === 0){
                         this.myorder = data.body.resutl;
+                    }
+                });
+            },
+            /**
+             * 获取accessToken
+             */
+            accesstoken(){
+                this.$http.post('/ffapi/common/accesstoken', {
+                    url: encodeURIComponent(window.location.href),
+                }).then(function(data){
+                    if(data && data.body && data.body.meta && data.body.meta.errno === 0){
+                        let temp = data.body.result;
+                        ffanSDK.config({
+                            appKey: temp.appKey,  //第三方应用appKey
+                            ts: temp.ts,  //签名时使用的时间戳
+                            nonceStr: temp.nonceStr,  //用来生成签名的随机串
+                            signature: temp.signature,  //生成的签名
+                            url: encodeURIComponent(window.location.href),  //当前页面的url 请使用urlEncode对url进行处理
+                        });
                     }
                 });
             }
