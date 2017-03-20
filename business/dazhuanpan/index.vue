@@ -30,7 +30,7 @@
             <div class="content">
                 <div class="title">活动规则</div>
                 <div class="detail">
-                    {{activity_desc}}
+                    <div v-html="activity_desc"></div>
                 </div>
             </div>
         </div>
@@ -45,8 +45,8 @@
                 <div class="tip-button" @click="tipButtonClick"></div>
                 <!-- 登录专享 -->
                 <div v-show="statusWin == 'status-login'">
-                    <input v-model="loginParams.telephone" type="number" class="input-phone">
-                    <input v-model="loginParams.code" type="number" class="input-code">
+                    <input v-model="loginParams.telephone" type="tel" class="input-phone" maxlength="11">
+                    <input v-model="loginParams.code" type="tel" class="input-code" maxlength="6">
                     <div id="error" class="error" v-show="statusError">
                         <img :src="images.error" alt="">
                         <div class="msg" v-show="statusError=='error-return'">{{errorMsg}}</div>
@@ -70,15 +70,21 @@
             <img :src="images.win_owner" alt="" class="win_img_bg">
             <img :src="images.win_close" alt="" class="win_close" @click="hideWin">
             <div class="win_owner-list">
-                <div class="win_owner-item" v-for="(item, index) in myorder" :class="{isUsed: item.status === 1, isExpried: item.status === 2}">
+                <div class="win_owner-item" v-for="(item, index) in myorder" 
+                    :class="{isUsed: item.status === 1, isExpried: item.status === 2}"
+                    :style="owner_radius">
                     <div class="left">
-                        
+                        <img :src="images.logo_default" alt="">
                     </div>
                     <div class="right">
                         <div class="name">{{item.gift_name}}</div>
-                        <div class="code">{{item.code}}</div>
-                        <div class="time">{{item.expired_at}}</div>
+                        <div class="code">兑换码：{{item.code}}</div>
+                        <div class="time">有效期：{{item.expired_at}}</div>
                     </div>
+
+                    <!-- <div class="model" v-show="item.status !== 0" :style="owner_radius"></div> -->
+                    <img v-if="item.status === 1" :src="images.item_used" alt="" class="mark">
+                    <img v-if="item.status === 2" :src="images.item_expried" alt="" class="mark">
                 </div>
             </div>
             <!-- myorder -->
@@ -99,8 +105,15 @@
         data(){
             return Data;
         },
-        methods:{
+        computed: {
+            owner_radius(){
+                return "border-radius:" + $(".win_owner").width() * 15 / 697 + "px";
+            }
+        },
+        methods: {
             init(){
+                // Cookies.delCookie("phone");
+                // Cookies.delCookie("puid");
                 Data.loading = true;
                 this.initSize();
                 this.initDate();
@@ -144,7 +157,7 @@
             },
 
             isffan(){
-                return window.navigator.userAgent.indexOf("ffan") > 0;
+                return window.navigator.userAgent.indexOf("BO") >= 0;
             },
 
             load_ffan(){
@@ -177,19 +190,11 @@
                     this.initSize();
                     Win.tipWinShow("status-login");
                 }else if(Data.loginParams.puid){// 已登录
+                    Data.loading = true;
                     Service.play();
                 }
                 
-            },
-            lotteryMove(id, msg){
-                Lottery.lotteryMove(id, ()=>{
-                    if(id === 0){// 未中奖
-                        Win.tipWinShow("status-out");
-                    }else{ // 已中奖
-                        Data.gift_name = msg;
-                        Win.tipWinShow("status-in"); 
-                    }
-                });
+                
             },
             // 显示规则窗口
             ruleWinShow(){
@@ -232,6 +237,9 @@
                 }
             },
             getCode(){
+                if(Data.loading) return;
+                Data.loading = true;
+
                 Service.getCode();
             }
         },

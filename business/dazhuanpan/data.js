@@ -50,6 +50,9 @@ let data = {
         win_close: require("./images/win_close.png"),
         owner: require("./images/owner.png"),
         error: require("./images/error.jpg"),
+        logo_default: require("./images/logo_default.png"),
+        item_expried: require("./images/item_expried.png"),
+        item_used: require("./images/item_used.png"),
     },
     // 大转盘奖品
     prizes: [

@@ -52,7 +52,7 @@ let service = {
             Data.statusOpen = data.body.result.status;
             Data.prizes = data.body.result.winning_gifts;
             Data.activity_id = data.body.result.id;
-            Data.activity_desc = data.body.result.desc;
+            Data.activity_desc = (data.body.result.desc + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br\>$2');
             Lottery.setPrizes(Data.prizes, "id");
 
             Data.loading = false;
@@ -117,17 +117,35 @@ let service = {
             platform: 1,
             puid: Data.loginParams.puid
         }).then(function(data){
-            Lottery.lotteryMove(data.body.result.id, data.body.result.winning_name);
+            Lottery.lotteryMove(data.body.result.id, ()=>{
+                
+                Data.loading = false;
+                if(data.body.result.id === 0){// 未中奖
+                    Win.tipWinShow("status-out");
+                }else{ // 已中奖
+                    Data.gift_name = data.body.result.winning_name;
+                    Win.tipWinShow("status-in"); 
+                }
+            });
         }, function(data){
-            alert("参与失败");// TODO
+            Data.loading = false;
+            if(data && data.body && data.body.meta && data.body.meta.errno === 1522008){
+                Win.tipWinShow("status-no");
+            }else{
+                alert("参与失败");// TODO
+            }
+            
         });
     },
     order(){
         Vue.http.post('/ffapi/activity/myorder', {
             phone: Data.loginParams.telephone,
         }).then(function(data){
+            Data.loading = false;
             Data.myorder = data.body.result;
             Data.show.win_owner = true;
+        }, function(){
+            Data.loading = false;
         });
     },
     /**

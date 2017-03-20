@@ -294,12 +294,69 @@
             top: 100% * 280 / 996;
             bottom: 0;
             width: 100% * 611 / 697;
+            height: 100% * 716 / 996;
+            overflow-y: auto;
             left: 50%;
             transform: translateX(-50%);
 
             .win_owner-item{
                 width: 100%;
-                height: 100% * 172 / 996;
+                height: 100% * 172 / 716;
+                background: #cef3ff;
+                // border-radius: 100% * 20 / 697;
+                margin-bottom: 100% * 40 / 996;
+                overflow: hidden;
+                position: relative;
+                
+                .left, .right{
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 100% * 117 / 172;
+                }
+                .left{
+                    width: 100% * 190 / 611;
+                    border-right: 1px dashed #a1000d;
+                    float: left;
+
+                    img{
+                        height: 100%;
+                        left: 50%;
+                        position: relative;
+                        transform: translateX(-50%);
+                    }
+                } 
+
+                .right{
+                    padding-left: 100% * 220 / 611;
+                    padding-right: 100% * 20 / 611;
+
+                    .name{
+                        line-height: 2;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+
+                .model{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #000;
+                    opacity: .5;
+                }
+
+                .mark{
+                    position: absolute;
+                    bottom: 0;
+                    z-index: 50;
+                    right: 100% * 40 / 611;
+                    width: 100% * 147 / 611;
+                    height: 100% * 127 / 172;
+                }
             }
         }
     }
