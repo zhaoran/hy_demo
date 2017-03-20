@@ -86,6 +86,7 @@ let service = {
         }).then(function(data){
             Data.loading = false;
             Data.statusLogin = data.body.result.data.type; // 1调用注册，2调用登录
+            Data.loginParams.code = "";
             // 倒计时
             Data.downNum = 61;
             Data.down = setInterval(() => {

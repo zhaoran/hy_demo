@@ -25,6 +25,7 @@ let win = {
         if(!Data.loginParams.puid){
             Data.loginParams.telephone = undefined;
         }
+        Data.errorMsg = undefined;
     }
 };
 

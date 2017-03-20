@@ -246,7 +246,7 @@
                             }else if(Data.statusLogin === 2){
                                 Service.login();
                             }else{
-                                // service.sendError("请先发送验证码");
+                                Service.sendError("请先发送验证码");
                             }
                         }
 
