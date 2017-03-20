@@ -126,6 +126,7 @@
                 // 判断进入的环境
                 if(this.isffan()){
                     alert("进入飞凡app了");
+                    console.log("============", "进入飞凡App环境", "=============");
                     this.load_ffan();
                 }else{
                     console.log("============", "进入本地环境", "=============");
@@ -167,7 +168,18 @@
                     alert("ready");
                     // config 信息验证通过后会执行 ready 方法
                     ffanSKD.setTitle({"title": "幸运大转盘"});
-                    Service.getPrizeList();
+                    
+                    // sdk.getEnvInfo({fn:'getLaunchParams',fnParams:{'bar':'foo'}})
+                    sdk.getEnvInfo()
+                        then(function(data){ 
+                            console.log("getEnvInfo 获取启动参数", data)
+
+                            Data.merchant_id = data.merchant_id;
+                            Service.getPrizeList();
+
+                        }).catch(function(err){
+                            console.log(err);
+                        })
                 });
 
                 // 校验失败的 error 函数
