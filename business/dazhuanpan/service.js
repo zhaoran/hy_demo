@@ -36,13 +36,14 @@ let service = {
         Cookies.setCookie("phone", Data.loginParams.telephone, 30);
         Cookies.setCookie("puid", Data.loginParams.puid, 30);
     },
-    sendError(meta){
+    sendError(msg){
         Data.statusError = 'error-return';
-        meta && (Data.errorMsg = meta.msg);
+        Data.errorMsg = msg;
     },
 
     getErrorMsg(data){
-        return data && data.body && data.body.meta && data.body.meta.msg;
+        let t = data && data.body && data.body.meta && data.body.meta.msg;
+        return t;
     },
 
     // --------------------Http 请求 ----------------------
@@ -72,14 +73,19 @@ let service = {
         if((Data.downNum <= 60 && Data.downNum >= 0)){
             return;
         }
-        if(!this.isPhone()) return;
+        if(!this.isPhone()) {
+            Data.loading = false;
+            return;
+        }
+
+        Data.statusError = undefined;
+        Data.errorMsg = "";
 
         Vue.http.post('/ffapi/user/send/sms', {
             phone: Data.loginParams.telephone
         }).then(function(data){
+            Data.loading = false;
             Data.statusLogin = data.body.result.data.type; // 1调用注册，2调用登录
-            Data.statusError = undefined;
-            Data.errorMsg = "";
             // 倒计时
             Data.downNum = 61;
             Data.down = setInterval(() => {
@@ -89,7 +95,8 @@ let service = {
                 }
             }, 1000);
         }, function(data){
-            service.sendError(data.body.meta);
+            Data.loading = false;
+            service.sendError(service.getErrorMsg(data));
         });
     },
     login(){

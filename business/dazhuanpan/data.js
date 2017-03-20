@@ -36,7 +36,7 @@ let data = {
     statusError: undefined,
     // 错误信息
     errorMsg: undefined,
-    statusLogin: 1, // 1调用注册，2调用登录
+    statusLogin: 0, // 1调用注册，2调用登录
     down: undefined, // 倒计时实例
     downNum: 61, // 倒计时秒数
     myorder: [], // 中奖列表信息

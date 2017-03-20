@@ -240,8 +240,16 @@
                 Data.statusError = undefined;
                 switch(Data.statusWin){
                     case 'status-login' :
-                        if(Service.isPhone() && Service.isCode())
-                            Data.statusLogin === 1 ? Service.register() : Service.login();
+                        if(Service.isPhone() && Service.isCode()){
+                            if(Data.statusLogin === 1){
+                                Service.register();
+                            }else if(Data.statusLogin === 2){
+                                Service.login();
+                            }else{
+                                // service.sendError("请先发送验证码");
+                            }
+                        }
+
                         break;
                     case 'status-in' :
                         // 中奖之后做什么
