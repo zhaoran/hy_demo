@@ -26,6 +26,6 @@ let win = {
             Data.loginParams.telephone = undefined;
         }
     }
-}
+};
 
 export default win;

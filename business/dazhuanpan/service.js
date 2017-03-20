@@ -41,11 +41,15 @@ let service = {
         meta && (Data.errorMsg = meta.msg);
     },
 
+    getErrorMsg(data){
+        return data && data.body && data.body.meta && data.body.meta.msg;
+    },
+
     // --------------------Http 请求 ----------------------
     /**
      * 根据商户获取当前有效活动
      */
-    getPrizeList(fn){
+    getPrizeList(){
         Vue.http.post('/ffapi/activity/useable/activity', {
             merchant_id: Data.merchant_id
         }).then(function(data){
@@ -57,7 +61,8 @@ let service = {
 
             Data.loading = false;
         }, function(data){
-            alert((data && data.body && data.body.meta) || "获取活动失败");
+            Data.errorMsg = service.getErrorMsg(data) || "获取活动失败";
+            Win.tipWinShow("status-error");
         });
     },
     /**
@@ -96,7 +101,7 @@ let service = {
             service.loginSuccess(data.body.result);
             Win.hideWin();
         }, function(data){
-            service.sendError((data && data.body && data.body.meta) || "登录失败，请重试");
+            service.sendError(service.getErrorMsg(data) || "登录失败，请重试");
         });
     },
     register(){
@@ -108,7 +113,7 @@ let service = {
             service.loginSuccess(data.body.result);
             Win.hideWin();
         }, function(data){
-            service.sendError((data && data.body && data.body.meta) || "登录失败，请重试");
+            service.sendError(service.getErrorMsg(data) || "登录失败，请重试");
         });
     },
     play(){
@@ -134,7 +139,8 @@ let service = {
             if(data && data.body && data.body.meta && data.body.meta.errno === 1522008){
                 Win.tipWinShow("status-no");
             }else{
-                alert("参与失败");// TODO
+                Data.errorMsg = "参与失败";
+                Win.tipWinShow("status-error");
             }
             
         });

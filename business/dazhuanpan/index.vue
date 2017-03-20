@@ -63,6 +63,10 @@
                 <div v-show="statusWin == 'status-in'" class="status-in-msg">
                     获得{{gift_name}}
                 </div>
+                <!-- 错误提示专享 -->
+                <div v-show="statusWin == 'status-error'" class="status-in-msg">
+                    {{errorMsg}}
+                </div>
             </div>
         </div>
         <!-- 我得奖品 -->

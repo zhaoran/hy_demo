@@ -30,6 +30,7 @@ let data = {
     // 窗口状态 
     // status-end 结束、status-in 中奖、status-login 登录、
     // status-no 已用完、status-out 未中奖、status-un 未开始
+    // status-error 错误信息
     statusWin: undefined,
     // 错误状态
     statusError: undefined,
