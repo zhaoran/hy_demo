@@ -3,11 +3,9 @@ if(ENV === 'local' || ENV === 'rd'){
     require('business/index.html');
 }
 
-// require('public/third_party/jquery.easing.min.js');
-// require('public/third_party/jQueryRotate.js');    
-
 import business from 'business/business';
 import routerMap from './router';
+import interceptors from './interceptors';
 
 var router = new VueRouter({
     mode: 'history',
@@ -21,6 +19,8 @@ router.afterEach((to, from) => {
     }
 
 });
+
+Vue.http.interceptors.push(interceptors);
 
 var app = new Vue({
     router: router,

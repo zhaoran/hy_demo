@@ -1,4 +1,6 @@
-
+/**
+ * cookie 控制
+ */
 
 export default {
     //设置cookie
