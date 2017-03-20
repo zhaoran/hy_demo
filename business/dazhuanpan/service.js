@@ -56,6 +56,8 @@ let service = {
             Lottery.setPrizes(Data.prizes, "id");
 
             Data.loading = false;
+        }, function(data){
+            alert((data && data.body && data.body.meta) || "获取活动失败");
         });
     },
     /**

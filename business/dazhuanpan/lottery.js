@@ -109,7 +109,7 @@ function setDate(prizes){
     // 文字半径
     config.textRadius = config.width / 2 * 350 / 438; 
     // 文字样式
-    config.fontStyle = "700 " + 30 * window.document.body.clientWidth / 750 + "px STHeitiSC Medium";
+    config.fontStyle = "700 " + 26 * window.document.body.clientWidth / 750 + "px STHeitiSC Medium";
 }
 
 function drawBase(){
