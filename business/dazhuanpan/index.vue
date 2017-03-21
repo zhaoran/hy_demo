@@ -17,8 +17,8 @@
                 <!-- <canvas class="inner" ></canvas> -->
             </div>
             <!-- 大转盘按钮 -->
-            <div id="lotteryBtn" class="btn" @click="lotteryClick">
-                <img :src="images.zp_btn_3" class="inner" alt="">
+            <div id="lotteryBtn" class="btn">
+                <img :src="images.zp_btn_3" class="inner" alt="" @click="lotteryClick">
             </div>
             <!-- 活动规则按钮 -->
             <img :src="images.rule" alt="" class="rule" @click="ruleWinShow">
@@ -155,8 +155,7 @@
             initDate(){
 
                 // 登录信息
-                Data.loginParams.telephone = Cookies.getCookie("phone");
-                Data.loginParams.puid = Cookies.getCookie("puid");
+                Service.loginMsg();
                 // 商户id 
                 Data.merchant_id = this.$route.query.merchantid || "001";
             },

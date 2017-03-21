@@ -3,7 +3,7 @@
  * 业务逻辑判断
  */
 
-import Cookies from './cookies';
+import Cookies from 'cookies-js';
 import Lottery from './lottery';
 import Data from './data';
 import Win from './win';
@@ -28,13 +28,18 @@ let service = {
         }
         return true;
     },
-
+    loginMsg(){
+        Data.loginParams.telephone = Cookies.get("phone");
+        Data.loginParams.puid = Cookies.get("puid");
+    },
     loginSuccess(data){
         // 错误状态制为空
         Data.statusError = undefined;
         Data.loginParams.puid = data.ffuid;
-        Cookies.setCookie("phone", Data.loginParams.telephone, 30);
-        Cookies.setCookie("puid", Data.loginParams.puid, 30);
+        // Cookies.setCookie("phone", Data.loginParams.telephone, 30);
+        // Cookies.setCookie("puid", Data.loginParams.puid, 30);
+        Cookies.set("phone", Data.loginParams.telephone, {path: '/', expires: 720 * 3600});
+        Cookies.set("puid", Data.loginParams.puid, {path: '/', expires: 720 * 3600});
     },
     sendError(msg){
         Data.statusError = 'error-return';
