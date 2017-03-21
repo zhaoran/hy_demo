@@ -26,21 +26,24 @@
         background-size: 100%;
         background-position: bottom;
     }
-    
-    // 我的奖品
-    .owner{
-        display: block;
+
+    .title-head{
         position: absolute;
-        width: 100% * 100 / 750;
-        right: 100% * 28 / 750;
-        z-index: 11;
-        top: 100% * 41 / 1334;
+        top: 0;
+        width: 100% * 724 / 750;
+        z-index: 4;
+        left: 50%;
+        transform: translateX(-50%);
+
+        img{
+            width: 100%;
+        }
     }
     
     // 大转盘
     .lottery{
         position: fixed;
-        width: 80%;
+        width: 100% * 643 / 750;
         height: auto;
         top: 50%;
         left: 50%;
@@ -86,22 +89,26 @@
         .btn{
             width: 100%;
             height: 100%;
-            margin-left: -100% * 1/ 643;
+            // margin-left: -100% * 1/ 643;
             position: absolute;
             top: 0;
             left: 0;
             z-index: 10;
             background: url(./images/zp_btn.png) no-repeat center;
-            background-size: 100%;
+            background-size: 100% * 204 / 643 100% * 221 / 643;
+            background-position: 100% * 322 / 643 100% * 305 / 643;
             
             // 按钮呼吸
             .inner{
                 width: 100% * 178 / 643;
+                // width: 100% * 158 / 643;
                 margin-left: 100% * 2/ 643;
                 position: absolute;
                 display: block;
-                top: 50%;
-                left: 50%;
+                top: 50% + 100% * 1 / 643;
+                left: 50% + 100% * 1 / 643;
+                // top: 50%;
+                // left: 50%;
                 transform: translate(-50%, -50%);
                 z-index: 10;
                 animation-name: breath; 
@@ -110,14 +117,14 @@
                 animation-iteration-count: infinite;            /* 播放次数：无限 */
             }
             @keyframes breath {
-                from {width: 100% * 158 / 643;}
-                50%  {width: 100% * 178 / 643;}
-                to   {width: 100% * 158 / 643;}
+                from {width: 100% * 158 / 643;top: 50%;left: 50%;}
+                50%  {width: 100% * 178 / 643;top: 50% + 100% * 1 / 643;left: 50% + 100% * 1 / 643;}
+                to   {width: 100% * 158 / 643;top: 50%;left: 50%;}
             }
             @-webkit-keyframes breath {
-                from {width: 100% * 158 / 643;}
-                50%  {width: 100% * 178 / 643;}
-                to   {width: 100% * 158 / 643;}
+                from {width: 100% * 158 / 643;top: 50%;left: 50%;}
+                50%  {width: 100% * 178 / 643;top: 50% + 100% * 1 / 643;left: 50% + 100% * 1 / 643;}
+                to   {width: 100% * 158 / 643;top: 50%;left: 50%;}
             }
         }
 
@@ -126,10 +133,22 @@
             display: block;
             z-index: 20;
             position: absolute;
-            width: 100% * 129 / 643;
-            height: 100% * 129 / 643;
-            bottom: 100% * 27 / 643;
-            left: 100% * 27 / 643;
+            width: 100% * 117 / 643;
+            height: 100% * 103 / 643;
+            bottom: 100% * 10 / 643;
+            left: 100% * 10 / 643;
+        }
+
+    
+        // 我的奖品
+        .owner{
+            display: block;
+            z-index: 20;
+            position: absolute;
+            width: 100% * 107 / 643;
+            // height: 100% * 129 / 643;
+            bottom: 100% * 13 / 643;
+            right: 100% * 7 / 643;
         }
     }
     
@@ -215,6 +234,7 @@
                 position: absolute;
                 width: 100%;
                 height: 100% * 40 / 433;
+                line-height: 1.3;
                 text-align: center;
                 color: #f95f15;
                 top: 100% * 65 / 433;
@@ -234,10 +254,11 @@
         }
         .status-error{
             background-image: url(./images/status-error.jpg);
-            .status-in-msg{ 
+            .status-error-msg{ 
                 position: absolute;
                 width: 100%;
                 height: 100% * 40 / 433;
+                line-height: 1.3;
                 text-align: center;
                 color: #f95f15;
                 top: 100% * 95 / 433;

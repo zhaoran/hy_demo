@@ -31,7 +31,7 @@ export default {
     lotteryMove(id, fn){
         lotteryMove(id, fn);
     }
-}
+};
 
 let canvas      = undefined;
 let ctx         = undefined;
@@ -53,7 +53,7 @@ let styleObj = ["#fbdd0d", "#f6c500", "#f6ae00"];
  */
 let styleArr = [
     [],
-    [],
+    [styleObj[0]],
     [styleObj[0], styleObj[1]],
     [styleObj[0], styleObj[1], styleObj[2]],
     [styleObj[0], styleObj[1], styleObj[0], styleObj[1]],
@@ -103,7 +103,7 @@ function setDate(prizes){
 
     config.height = canvas.height;
     //大转盘内圆的半径
-    config.inRadius = config.width / 2 * 168 / 436; 
+    config.inRadius = config.width / 2 * 1 / 436; 
     //大转盘外圆的半径
     config.outRadius = config.width / 2;
     // 文字半径
@@ -158,7 +158,7 @@ function lotteryMove(id, fn){
     // TODO 中奖位置计算
     let curIndex = idForIndex[id];
     
-    config.rsAngle = 360/(config.length)*(curIndex+0.5)
+    config.rsAngle = 360/(config.length)*(curIndex+0.5);
 
     $("#lottery").rotate({
         angle: 0,

@@ -3,8 +3,9 @@
         <div class="bg bg_1"></div>
         <div class="bg bg_2"></div>
         <div class="bg bg_3"></div>
-        <!-- 我的奖品 -->
-        <img :src="images.owner" alt="" class="owner" @click="ownerClick" v-show="loginParams.puid">
+
+        <div class="title-head"><img :src="images.title" alt=""></div>
+        
         <!-- 大转盘。有盘阴影 -->
         <div class="lottery">
             <!-- 大转盘可转动部分 -->
@@ -22,6 +23,8 @@
             </div>
             <!-- 活动规则按钮 -->
             <img :src="images.rule" alt="" class="rule" @click="ruleWinShow">
+            <!-- 我的奖品 -->
+            <img :src="images.owner" alt="" class="owner" @click="ownerClick" v-show="loginParams.puid">
         </div>
         <!-- 活动规则 -->
         <div class="win_rule" v-show="show.win_rule">
@@ -60,11 +63,11 @@
                     </div>
                 </div>
                 <!-- 中奖专享 -->
-                <div v-show="statusWin == 'status-in'" class="status-in-msg">
+                <div v-show="statusWin == 'status-in'" class="status-in-msg" :style="status_msg">
                     获得{{gift_name}}
                 </div>
                 <!-- 错误提示专享 -->
-                <div v-show="statusWin == 'status-error'" class="status-in-msg">
+                <div v-show="statusWin == 'status-error'" class="status-error-msg" :style="status_msg">
                     {{errorMsg}}
                 </div>
             </div>
@@ -99,7 +102,6 @@
 
 <script>
     require('public/third_party/jQueryRotate.js');    
-    import Cookies from './cookies';
     import Lottery from './lottery';
     import Data from './data';
     import Win from './win';
@@ -112,6 +114,9 @@
         computed: {
             owner_radius(){
                 return "border-radius:" + $(".win_owner").width() * 15 / 697 + "px";
+            },
+            status_msg(){
+                return "font-size:" + 35 * $("body").width() / 750 + "px";
             }
         },
         methods: {
@@ -143,10 +148,10 @@
                     $("body").css("font-size", 20 * $("body").width() / 750 + "px")
                     $(".code-msg .inner").css("line-height", $(".code-msg .inner").height() + "px");
                     $(".status-login .error").css("line-height", $(".status-login .error").height() + "px");
-                    $(".status-in-msg").css({
-                        "line-height": $(".status-in-msg").height() + "px",
-                        "font-size": 35 * $("body").width() / 750 + "px"
-                    });
+                    // $(".status-in-msg").css({
+                    //     "line-height": $(".status-in-msg").height() + "px",
+                    //     "font-size": 35 * $("body").width() / 750 + "px"
+                    // });
                     $(".win_rule .content").css({
                         "font-size": 28 * $("body").width() / 750 + "px"
                     });

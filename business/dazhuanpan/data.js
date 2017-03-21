@@ -43,6 +43,7 @@ let data = {
     images: {
         zp_2: require("./images/zp2.png"),
         zp_btn_3: require("./images/zp_btn_3.png"),
+        title: require("./images/title.png"),
         gif: require("./images/gif.gif"),
         rule: require("./images/rule.png"),
         win_rule: require("./images/win_rule.png"),

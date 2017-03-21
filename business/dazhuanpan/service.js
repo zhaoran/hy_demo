@@ -140,7 +140,7 @@ let service = {
             Lottery.lotteryMove(data.body.result.id, ()=>{
                 
                 Data.loading = false;
-                if(data.body.result.id === 0){// 未中奖
+                if(Number(data.body.result.id) === 0){// 未中奖
                     Win.tipWinShow("status-out");
                 }else{ // 已中奖
                     Data.gift_name = data.body.result.winning_name;
