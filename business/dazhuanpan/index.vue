@@ -95,7 +95,7 @@
                         <img :src="images.logo_default" alt="">
                     </div>
                     <div class="right">
-                        <div class="name">{{item.gift_name}}</div>
+                        <div class="name" :style="owner_name_size">{{item.gift_name}}</div>
                         <div class="code">兑换码：{{item.code}}</div>
                         <div class="time">有效期：{{item.expired_at}}</div>
                     </div>
@@ -128,6 +128,9 @@
             },
             status_msg(){
                 return "font-size:" + 35 * $("body").width() / 750 + "px";
+            },
+            owner_name_size(){
+                return "font-size:" + 24 * $("body").width() / 750 + "px";
             }
         },
         methods: {

@@ -121,15 +121,25 @@
                 animation-timing-function: ease-in-out;         /* 动画速度曲线：以低速开始和结束 */
                 animation-iteration-count: infinite;            /* 播放次数：无限 */
             }
+            // @keyframes breath {
+            //     from {width: 100% * 158 / 643;top: 50%;left: 50%;}
+            //     50%  {width: 100% * 178 / 643;top: 50% + 100% * 1 / 643;left: 50% + 100% * 1 / 643;}
+            //     to   {width: 100% * 158 / 643;top: 50%;left: 50%;}
+            // }
+            // @-webkit-keyframes breath {
+            //     from {width: 100% * 158 / 643;top: 50%;left: 50%;}
+            //     50%  {width: 100% * 178 / 643;top: 50% + 100% * 1 / 643;left: 50% + 100% * 1 / 643;}
+            //     to   {width: 100% * 158 / 643;top: 50%;left: 50%;}
+            // }
             @keyframes breath {
-                from {width: 100% * 158 / 643;top: 50%;left: 50%;}
-                50%  {width: 100% * 178 / 643;top: 50% + 100% * 1 / 643;left: 50% + 100% * 1 / 643;}
-                to   {width: 100% * 158 / 643;top: 50%;left: 50%;}
+                from {width: 100% * 158 / 643;}
+                50%  {width: 100% * 178 / 643;}
+                to   {width: 100% * 158 / 643;}
             }
             @-webkit-keyframes breath {
-                from {width: 100% * 158 / 643;top: 50%;left: 50%;}
-                50%  {width: 100% * 178 / 643;top: 50% + 100% * 1 / 643;left: 50% + 100% * 1 / 643;}
-                to   {width: 100% * 158 / 643;top: 50%;left: 50%;}
+                from {width: 100% * 158 / 643;}
+                50%  {width: 100% * 178 / 643;}
+                to   {width: 100% * 158 / 643;}
             }
         }
 
