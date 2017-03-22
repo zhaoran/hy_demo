@@ -60,7 +60,7 @@ let service = {
             merchant_id: Data.merchant_id
         }).then(function(data){
             let temp = data.body.result;
-            if(!temp) return;
+            if(!temp || !temp.status) return;
 
             Data.statusOpen = temp.status;
             Data.prizes = temp.winning_gifts;

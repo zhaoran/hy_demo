@@ -173,7 +173,7 @@
                 // 登录信息
                 Service.loginMsg();
                 // 商户id 
-                Data.merchant_id = this.$route.query.merchantid || "001";
+                Data.merchant_id = this.$route.query.merchantid || "10033650";
             },
 
             isffan(){
