@@ -15,7 +15,8 @@ let service = {
             return false;
         }
 
-        if (!(/^13[0-9]{9}|15[012356789][0-9]{8}|18[012356789][0-9]{8}|12[012356789][0-9]{8}|147[0-9]{8}$/.test(Data.loginParams.telephone))) {
+        // if (!(/^13[0-9]{9}|15[012356789][0-9]{8}|18[012356789][0-9]{8}|12[012356789][0-9]{8}|147[0-9]{8}$/.test(Data.loginParams.telephone))) {
+        if (!(/^1[3-9]{1}[0-9]{9}$/.test(Data.loginParams.telephone))) {
             Data.statusError = "error-tel-style";
             return false;
         }
