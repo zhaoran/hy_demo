@@ -13,6 +13,8 @@ let data = {
     activity_id: undefined,
     // 活动规则
     activity_desc: undefined,
+    // 活动开始时间
+    activity_begin: undefined,
     // 商户id
     merchant_id: '001',
     // 中奖信息
@@ -44,6 +46,7 @@ let data = {
         zp_2: require("./images/zp2.png"),
         zp_btn_3: require("./images/zp_btn_3.png"),
         title: require("./images/title.png"),
+        title_1: require("./images/title_1.png"),
         gif: require("./images/gif.gif"),
         rule: require("./images/rule.png"),
         win_rule: require("./images/win_rule.png"),

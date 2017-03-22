@@ -59,10 +59,14 @@ let service = {
         Vue.http.post('/ffapi/activity/useable/activity', {
             merchant_id: Data.merchant_id
         }).then(function(data){
-            Data.statusOpen = data.body.result.status;
-            Data.prizes = data.body.result.winning_gifts;
-            Data.activity_id = data.body.result.id;
-            Data.activity_desc = (data.body.result.desc + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br\>$2');
+            let temp = data.body.result;
+            if(!temp) return;
+
+            Data.statusOpen = temp.status;
+            Data.prizes = temp.winning_gifts;
+            Data.activity_id = temp.id;
+            Data.activity_desc = (temp.desc + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br\>$2');
+            Data.activity_begin = temp.start_time;
             Lottery.setPrizes(Data.prizes, "id");
 
             Data.loading = false;
