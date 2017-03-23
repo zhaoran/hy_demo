@@ -11,3 +11,7 @@ npm run local
 npm run rd
 
 访问：http://fe2.rongyi.com:8088/wanda_app/dazhuanpan/index
+
+
+### add Cookies-js
+github：https://github.com/ScottHamper/Cookies

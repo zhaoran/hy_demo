@@ -27,8 +27,8 @@ webpackConfig.devServer = {
     historyApiFallback: true,
     stats: 'errors-only',
     proxy: {
-        '^/app/**': {
-            target: 'http://192.168.1.52',
+        '^/ffapi/**': {
+            target: "http://fe2.rongyi.com:8088",
             changeOrigin: 'true'
         }
     }
