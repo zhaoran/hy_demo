@@ -195,7 +195,7 @@
                     sdk.getEnvInfo()
                         then(function(data){ 
                             console.log("getEnvInfo 获取启动参数", data)
-
+                            alert(JSON.stringify(data));
                             Data.merchant_id = data.merchant_id;
                             Service.getPrizeList();
 
