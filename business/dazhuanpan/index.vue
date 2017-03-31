@@ -92,7 +92,8 @@
                     :class="{isUsed: item.status === 1, isExpried: item.status === 2}"
                     :style="owner_radius">
                     <div class="left">
-                        <img :src="images.logo_default" alt="">
+                        <img v-if="storeLogo" :src="storeLogo" alt="">
+                        <img v-else :src="images.logo_default" alt="">
                     </div>
                     <div class="right">
                         <div class="name" :style="owner_name_size">{{item.gift_name}}</div>
@@ -197,6 +198,7 @@
                             console.log("getEnvInfo 获取启动参数", data)
                             // alert(JSON.stringify(data));
                             Data.merchant_id = data.storeId;
+                            Data.storeLogo = data.storeLogo;
                             Service.getPrizeList();
 
                         }).catch(function(err){
