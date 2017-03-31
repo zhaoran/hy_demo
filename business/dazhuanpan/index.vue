@@ -148,7 +148,7 @@
                 });
                 // 判断进入的环境
                 if(this.isffan()){
-                    alert("进入飞凡app了");
+                    // alert("进入飞凡app了");
                     console.log("============", "进入飞凡App环境", "=============");
                     this.load_ffan();
                 }else{
@@ -187,7 +187,7 @@
                 Service.accesstoken();
                 // 验证通过 ready 函数
                 ffanSDK.ready((sdk) => {
-                    alert("ready");
+                    // alert("ready");
                     // config 信息验证通过后会执行 ready 方法
                     ffanSKD.setTitle({"title": "幸运大转盘"});
                     
@@ -195,7 +195,7 @@
                     sdk.getEnvInfo()
                         then(function(data){ 
                             console.log("getEnvInfo 获取启动参数", data)
-                            alert(JSON.stringify(data));
+                            // alert(JSON.stringify(data));
                             Data.merchant_id = data.storeId;
                             Service.getPrizeList();
 
@@ -206,7 +206,7 @@
 
                 // 校验失败的 error 函数
                 ffanSDK.error((res) => {
-                    alert("error");
+                    // alert("error");
 
                 });
             },
