@@ -17,6 +17,8 @@ let data = {
     activity_begin: undefined,
     // 商户id
     merchant_id: '001',
+    // 商户logo
+    storeLogo: undefined,
     // 中奖信息
     gift_name: "", 
     // 弹窗显示

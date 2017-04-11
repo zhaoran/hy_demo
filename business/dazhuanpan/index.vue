@@ -92,7 +92,8 @@
                     :class="{isUsed: item.status === 1, isExpried: item.status === 2}"
                     :style="owner_radius">
                     <div class="left">
-                        <img :src="images.logo_default" alt="">
+                        <img v-if="storeLogo" :src="storeLogo" alt="">
+                        <img v-else :src="images.logo_default" alt="">
                     </div>
                     <div class="right">
                         <div class="name" :style="owner_name_size">{{item.gift_name}}</div>
@@ -148,7 +149,7 @@
                 });
                 // 判断进入的环境
                 if(this.isffan()){
-                    alert("进入飞凡app了");
+                    // alert("进入飞凡app了");
                     console.log("============", "进入飞凡App环境", "=============");
                     this.load_ffan();
                 }else{
@@ -187,7 +188,7 @@
                 Service.accesstoken();
                 // 验证通过 ready 函数
                 ffanSDK.ready((sdk) => {
-                    alert("ready");
+                    // alert("ready");
                     // config 信息验证通过后会执行 ready 方法
                     ffanSKD.setTitle({"title": "幸运大转盘"});
                     
@@ -195,8 +196,9 @@
                     sdk.getEnvInfo()
                         then(function(data){ 
                             console.log("getEnvInfo 获取启动参数", data)
-
-                            Data.merchant_id = data.merchant_id;
+                            // alert(JSON.stringify(data));
+                            Data.merchant_id = data.storeId;
+                            Data.storeLogo = data.storeLogo;
                             Service.getPrizeList();
 
                         }).catch(function(err){
@@ -206,7 +208,7 @@
 
                 // 校验失败的 error 函数
                 ffanSDK.error((res) => {
-                    alert("error");
+                    // alert("error");
 
                 });
             },
