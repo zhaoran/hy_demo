@@ -3,13 +3,13 @@
         <TopNav></TopNav>
         <div class="list">
             <div class="item"
-                v-for="item in list">
+                v-for="(item, index) in list">
                 <ResponsiveContainer>
                     <div class="img-wrapper">
                         <img :src="item.img">
                     </div>
                 </ResponsiveContainer>
-                <div class="img-title">{{item.text}}</div>
+                <div class="img-title">{{item.text}}{{index}}</div>
             </div>
         </div>
     </div>

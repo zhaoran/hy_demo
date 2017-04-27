@@ -4,7 +4,7 @@
 
         <div class="slider-list">
             <ResponsiveContainer>
-                <Slider>
+                <Slider :autoLoop="true" :interval="2000">
                     <SliderItem v-for="item in homeData['sliderList']">
                         <img :src="item.img">
                     </SliderItem>

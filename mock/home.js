@@ -33,11 +33,11 @@ export default{
 
     channelList: [
         {
-            name: 'game',
+            name: 'animation',
             img: 'http://img0.t.rongyi.com/123456789012345678901234/20170425/3416973a7ad1887df390b87f1ff3b020.jpg'
         },
         {
-            name: 'movie',
+            name: 'scenery',
             img: 'http://img0.t.rongyi.com/123456789012345678901234/20170427/d9c2f0eb34dea33b7d81ffa1ad8a2d8b.jpg'
         }
     ]

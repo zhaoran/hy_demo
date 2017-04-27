@@ -70,13 +70,6 @@
         }
     }
 
-    .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s ease;
-    }
-    .fade-enter, .fade-leave-active {
-      opacity: 0
-    }
-
     .slide-left-enter{
         transform: translate(100%, 0);
     }
