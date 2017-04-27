@@ -1,15 +1,13 @@
 {
-  "name": "rongyi_wanda_app",
+  "name": "hy_demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "public/main/app.js",
   "scripts": {
     "local": "webpack-dev-server --inline --hot --config ./build/webpack.local.config.js",
     "rd-compile": "webpack --config ./build/webpack.rd.config.js -w",
     "rd-upload": "gulp --gulpfile ./build/gulpfile.js watchAndUpload",
     "rd": "parallelshell \"npm run rd-upload\" \"npm run rd-compile\"",
-    "qa": "webpack --config ./build/webpack.qa.config.js --display-modules --display-error-details --sort-modules-by --progress",
-    "pre_online": "webpack -p --config ./build/webpack.pre_online.config.js --display-modules --progress",
     "online": "webpack -p --config ./build/webpack.online.config.js --display-modules --progress"
   },
   "devDependencies": {
@@ -38,18 +36,14 @@
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^10.3.0",
     "vue-style-loader": "^2.0.0",
-    "vue-template-compiler": "^2.1.10",
+    "vue-template-compiler": "^2.2.6",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
-    "vue": "^2.1.10",
-    "vue-router": "^2.2.0"
+    "vue": "^2.2.6",
+    "vue-router": "^2.5.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "http://192.168.1.251/fe/rongyi_cms2_merchant.git"
-  },
-  "author": "",
+  "author": "zhaoran",
   "license": "ISC"
 }

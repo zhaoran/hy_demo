@@ -3,13 +3,18 @@ if(ENV === 'local' || ENV === 'rd'){
     require('business/index.html');
 }
 
-import business from 'business/business';
+import 'public/third_party/zepto';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import routerMap from './router';
-import interceptors from './interceptors';
+import Business from 'business/business';
+
+Vue.use(VueRouter);
 
 var router = new VueRouter({
+    base: '/' + MODULE_NAME,
     mode: 'history',
-    routes: routerMap()
+    routes: routerMap
 });
 
 router.afterEach((to, from) => {
@@ -20,11 +25,10 @@ router.afterEach((to, from) => {
 
 });
 
-Vue.http.interceptors.push(interceptors);
 
 var app = new Vue({
     router: router,
-    render: h => h(business)
+    render: h => h(Business)
 })
 
 document.addEventListener('DOMContentLoaded', function () {

@@ -1,70 +1,127 @@
 <template>
     <div id="app" class="p-business">
-        <router-view></router-view>
+        <transition :name="transitionName" :mode="transitionMode">
+            <router-view class="view"></router-view>
+        </transition>
     </div>
 </template>
 
 <script>
 
+    const TRANSITION_HASH = {
+        'home:detail': 'slide-left',
+        'detail:home': 'slide-right'
+    };
+
+    const NO_TRANSITION_NAME = 'nothing';
+
     export default{
 
         data(){
             return {
+                transitionName: '',
+                transitionMode: ''
             };
+        },
+
+        watch: {
+            '$route'(to, from){
+                // debugger
+                let fromName = from.name;
+                let toName = to.name;
+
+                this.transitionName = TRANSITION_HASH[`${fromName}:${toName}`] || NO_TRANSITION_NAME;
+
+            }
         }
     }
 </script>
 
-<style type="less">
-
-    ::-webkit-scrollbar{
-        width: 0;
-        height: 0;
-    }
+<style lang="less">
 
     html,
     body {
-        position: relative;
+        margin: 0;
+        padding: 0;
         height: 100%;
         width: 100%;
         overflow-x: hidden;
     }
-    html{
-        font-size: 62.5%;
-    }
+
     body {
         font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
-        margin: 0;
-        padding: 0;
-        color: #000;
-        font-size: 1.4rem;
-        line-height: 1.4;
-        width: 100%;
-        -webkit-text-size-adjust: 100%;
-        overflow: hidden;
-    }
-    * {
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        -webkit-touch-callout: none;
-        margin: 0;
-        padding: 0;
-    }
-    a,
-    input,
-    textarea,
-    select {
-        outline: 0;
-    }
-    a {
-        text-decoration: none;
-        color: #007aff;
     }
 
     .p-business {
         position: relative;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        background-color: #fff;
+
+        img{
+            width: 100%;
+            height: 100%;
+        }
     }
+
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s ease;
+    }
+    .fade-enter, .fade-leave-active {
+      opacity: 0
+    }
+
+    .slide-left-enter{
+        transform: translate(100%, 0);
+    }
+
+    .slide-left-enter-active{
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        transition: transform .5s ease;
+    }
+    .slide-left-leave{
+
+    }
+    .slide-left-leave-active {
+        transition: transform .5s ease;
+        transform: translate(-30%, 0);
+    }
+
+
+    .slide-right-enter{
+        transform: translate(-30%, 0);
+    }
+
+    .slide-right-enter-active{
+        transition: all .5s ease;
+    }
+    .slide-right-leave{
+
+    }
+    .slide-right-leave-active{
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        transition: transform .5s ease;
+        transform: translate(100%, 0);
+    }
+
+    .nothing-enter{
+    }
+
+    .nothing-enter-active{
+    }
+    .nothing-leave{
+
+    }
+    .nothing-leave-active{
+        display: none;
+    }
+
+
 
 </style>

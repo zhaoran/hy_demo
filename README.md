@@ -5,13 +5,9 @@ npm i -g gulp parallelshell webpack
 #本地开发
 npm run local
 
-访问：http://127.0.0.1:8881/wanda_app/dazhuanpan/index
+访问：http://127.0.0.1:8882
 
 #联调环境
 npm run rd
 
-访问：http://fe2.rongyi.com:8088/wanda_app/dazhuanpan/index
-
-
-### add Cookies-js
-github：https://github.com/ScottHamper/Cookies
+访问：http://wx.fe8088.rongyi.com/hy_demo

@@ -9,7 +9,8 @@ webpackConfig.devtool = 'source-map';
 
 webpackConfig.plugins && webpackConfig.plugins.unshift(
     new webpack.DefinePlugin({
-        ENV: JSON.stringify('local')
+        ENV: JSON.stringify('local'),
+        MODULE_NAME: JSON.stringify('')
     })
 );
 
@@ -23,7 +24,7 @@ extend(webpackConfig.output, {
 
 
 webpackConfig.devServer = {
-    port: 8881,
+    port: 8882,
     historyApiFallback: true,
     stats: 'errors-only',
     proxy: {

@@ -1,23 +1,26 @@
 // import Vue from 'vue'
 
 
-export default function(){
+export default [
+    {
+        name: 'home',
+        path: '/',
+        meta: { title: '首页'},
+        component: resolve => require(['business/home/home'], resolve)
+    },
+    {
+        name: 'detail',
+        path: '/detail/:id',
+        meta: { title: '详情'}, 
+        component: resolve => require(['business/detail/detail'], resolve)
+    },
+    {
+        name: 'channel',
+        path: '/channel/:name',
+        meta: { title: '频道'}, 
+        component: resolve => require(['business/channel/channel'], resolve)
+    }       
+];
 
-    var routerMap = [
-        {
-            name: 'dazhuanpan.index',
-            path: prefix('/dazhuanpan/index'),
-            meta: { title: '幸运大转盘'},
-            component: resolve => require(['business/dazhuanpan/index'], resolve)
-        }
-    ];
 
-
-    function prefix(path=''){
-
-        return '/' + MODULE_NAME + path;
-
-    }
-
-    return routerMap;
-}
+    

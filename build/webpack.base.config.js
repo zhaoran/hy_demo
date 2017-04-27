@@ -1,15 +1,11 @@
 var path = require('path');
 var projectRoot = process.cwd();
 
-console.log('projectRoot:' + projectRoot);
-
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var moduleName = 'wanda_app';
+var moduleName = 'hy_demo';
 var staticName = moduleName + '_static';
-
-console.log('path:', path.resolve(projectRoot, './output/' + staticName + '/'))
 
 module.exports = {
     entry: './public/main/app.js',
@@ -31,14 +27,6 @@ module.exports = {
             ENV: JSON.stringify('online'),
             MODULE_NAME: JSON.stringify(moduleName)
         })
-    ],
-
-    externals: [
-        {
-            'vue': 'Vue',
-            'vue-router': 'VueRouter',
-            'vue-resource': 'VueResource'
-        }
     ],
 
     module: {
@@ -85,7 +73,8 @@ module.exports = {
         ],
         extensions: ['.webpack.js', '.web.js', '.js', '.vue'],
         alias: {
-            'vue$': 'vue/dist/vue.common.js'
+            'vue$': 'vue/dist/vue.common.js',
+            'components': 'public/components'
         }
     }
 
