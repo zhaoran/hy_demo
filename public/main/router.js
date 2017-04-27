@@ -4,7 +4,7 @@
 export default [
     {
         name: 'home',
-        path: '/',
+        path: '/', 
         meta: { title: '首页'},
         component: resolve => require(['business/home/home'], resolve)
     },
