@@ -50,6 +50,12 @@
 
     body {
         font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+        font-size: 12px;
+    }
+
+    html * {
+        outline: 0;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
 
     .p-business {

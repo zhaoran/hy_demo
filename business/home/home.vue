@@ -84,6 +84,10 @@
             .item{
                 width: 25%;
             }
+
+            a{
+                display: block;
+            }
         }
 
         .channel-list{
@@ -99,6 +103,10 @@
                     padding-left: 1px;
                     padding-right: 0;
                 }
+            }
+
+            a{
+                display: block;
             }
         }
     }
